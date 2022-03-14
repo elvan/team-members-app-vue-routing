@@ -1,5 +1,6 @@
 <template>
   <button @click="confirmInput">Confirm</button>
+  <button @click="saveChanges">Save</button>
   <ul>
     <user-item
       v-for="user in users"
@@ -20,10 +21,21 @@ export default {
 
   inject: ['users'],
 
+  data() {
+    return {
+      changesSaved: false,
+    };
+  },
+
   methods: {
     confirmInput() {
       // ...
       this.$router.push('/teams');
+    },
+
+    saveChanges() {
+      console.log('Saving changes...');
+      this.changesSaved = true;
     },
   },
 
@@ -31,6 +43,24 @@ export default {
     console.log('UsersList beforeRouteEnter');
     console.log(to, from);
     next();
+  },
+
+  beforeRouteLeave(to, from, next) {
+    console.log('UsersList beforeRouteLeave');
+    console.log(to, from);
+    if (!this.changesSaved) {
+      if (confirm('Are you sure you want to leave?')) {
+        next();
+      } else {
+        next(false);
+      }
+    } else {
+      next();
+    }
+  },
+
+  unmounted() {
+    console.log('UsersList unmounted');
   },
 };
 </script>
