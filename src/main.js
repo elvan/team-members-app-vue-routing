@@ -19,6 +19,7 @@ const router = createRouter({
       // alias: '/',
       children: [
         {
+          name: 'team-members',
           path: ':teamId',
           component: TeamMembers,
           props: true,
