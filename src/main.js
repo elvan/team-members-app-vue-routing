@@ -30,6 +30,9 @@ const router = createRouter({
           props: true,
         },
       ],
+      meta: {
+        needsAuthentication: true,
+      },
     },
     {
       path: '/users',
@@ -60,6 +63,9 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   console.log('Global beforeEach');
   console.log(to, from);
+  if (to.meta.needsAuthentication) {
+    console.log('Needs Authentication');
+  }
   next();
 });
 
