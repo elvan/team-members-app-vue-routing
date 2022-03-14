@@ -57,6 +57,12 @@ export default {
       );
     },
   },
+
+  beforeRouteUpdate(to, from, next) {
+    console.log('TeamMembers beforeRouteUpdate');
+    console.log(to, from);
+    next();
+  },
 };
 </script>
 
