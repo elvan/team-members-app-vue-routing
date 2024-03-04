@@ -49,7 +49,8 @@ a {
 }
 
 a:hover,
-a:active {
+a:active,
+a.active {
   border-color: #f1a80a;
   color: #f1a80a;
   background-color: #1a037e;
